@@ -5,3 +5,7 @@ export const isEmptyObject = o => {
 export const isString = o => {
   return typeof o === 'string';
 };
+
+export const isBoolean = o => {
+  return o === false || o === true;
+};
