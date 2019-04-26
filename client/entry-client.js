@@ -1,6 +1,7 @@
 import { createApp } from './app';
 import LoadingBar from './components/LoadingBar';
 import config from '../config';
+import { getModuleConfig } from '@/utils/func';
 
 const { app, router, store } = createApp();
 
@@ -9,14 +10,16 @@ let timer;
 // config bind into winodw
 window.config = config;
 
+const registerModule = storeModule => {
+  if (storeModule && (storeModule = getModuleConfig(storeModule).module)) {
+    store.registerModule(storeModule.name, storeModule);
+  }
+};
+
 router.onReady(initialRoute => {
   // first render and registerModule
   const initMatched = router.getMatchedComponents(initialRoute);
-  initMatched.forEach(({ storeModule }) => {
-    if (storeModule && typeof storeModule === 'object') {
-      store.registerModule(storeModule.name, storeModule);
-    }
-  });
+  initMatched.forEach(({ storeModule }) => registerModule(storeModule));
 
   // when async module has been register
   if (window.__INITIAL_STATE__) {
@@ -46,11 +49,7 @@ router.onReady(initialRoute => {
       return next();
     }
 
-    activated.map(({ storeModule }) => {
-      if (storeModule && typeof storeModule === 'object') {
-        store.registerModule(storeModule.name, storeModule);
-      }
-    });
+    activated.map(({ storeModule }) => registerModule(storeModule));
 
     LoadingBar.start({
       color: '#ff0768'

@@ -1,4 +1,5 @@
 import { createApp } from './app';
+import { getModuleConfig } from '@/utils/func';
 
 const noob = () => {};
 
@@ -20,7 +21,10 @@ export default ctx => {
       }
 
       matchedComponents.map(({ storeModule }) => {
-        if (storeModule) {
+        if (
+          storeModule &&
+          (storeModule = getModuleConfig(storeModule).module)
+        ) {
           store.registerModule(storeModule.name, storeModule);
         }
       });

@@ -47,8 +47,6 @@ module.exports = function(api, option = {}) {
     return params[$1] ? params[$1] : word;
   });
 
-  console.log(url, params)
-
   return new Promise((resolve, reject) => {
     axios({
       method,

@@ -1,3 +1,4 @@
+const request = require('../../client/utils/request');
 /**
  * if uid and token exits, so we need check its are correct.
  */
@@ -10,21 +11,28 @@ async function checkUserLogin(req, res, next) {
     return;
   }
 
-  // const checkUserApi = `${config.server}/api/user/checktoken`;
+  req.user = { uid: uid, token };
+
+  const checkUserApi = `${config.server}/api/user/checktoken`;
 
   // check the uid and the token is correct
-  // const response = await request(checkUserApi);
+  try {
+    const data = await request(checkUserApi);
+    // if correct then save userinfo into req.user
+    if (data.checked === 1) {
+      req.user = { ...req.user, userInfo: data.msg };
+    } else {
+      // or not delete uid and token
+      res.clearCookie('uid');
+      res.clearCookie('token');
+    }
+  } catch (e) {
+    // error 
+    res.clearCookie('uid');
+    res.clearCookie('token');
+  }
 
-  // // if correct then save userinfo into req.user
-  // if (response.code === 200 && response.msg.checked === 1) {
-  //   req.user = { userInfo: response.msg.userInfo, token };
-  // } else {
-  //   // or not delete uid and token
-  //   res.clearCookie('uid');
-  //   res.clearCookie('token');
-  // }
-
-  // next();
+  next();
 }
 
 module.exports = checkUserLogin;

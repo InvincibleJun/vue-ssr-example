@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const proxy = require('http-proxy-middleware');
 const cookieParser = require('cookie-parser');
 const app = express();
 
@@ -20,24 +19,21 @@ app.use(cookieParser());
 // proxy static source
 app.use('/', express.static(path.resolve(__dirname, '../static')));
 
-// proxy
-if (config.proxy) {
-  Object.keys(config.proxy).forEach(api => {
-    let { target, changeOrign = true } = config.proxy[api];
-    app.use(
-      api,
-      proxy({
-        target,
-        changeOrign
-      })
-    );
-  });
-}
 // user proxy check
 app.use(require('./middware/user'));
 
+// proxy
+require('./middware/proxy')(app);
+
 // render controller
 app.get('*', render);
+
+// catch err
+app.use(function(err, req, res) {
+  // eslint-disable-next-line no-console
+  console.error(err.stack);
+  res.render('500');
+});
 
 // listen port and start
 app.listen(config.port);

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import createRouter from './router';
+import createRouter from './routers';
 import createStore from './store';
 // import 'idempotent-babel-polyfill';
 import filters from './filters';

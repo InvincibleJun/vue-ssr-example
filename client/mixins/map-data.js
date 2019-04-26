@@ -1,22 +1,5 @@
-import { isBoolean } from '@/utils/func';
 
-// get module config
-const getModuleConfig = storeModule => {
-  // maybe use es6 module
-  let { destory, default: defaultModule, module: optionModule } = storeModule;
-  let m;
-  if (!isBoolean(destory)) {
-    destory = true;
-    m = defaultModule || storeModule;
-  } else {
-    m = optionModule.default || optionModule;
-  }
-
-  return {
-    module: m,
-    destory
-  };
-};
+import { getModuleConfig } from '@/utils/func';
 
 export default {
   destroyed() {

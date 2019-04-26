@@ -27,7 +27,7 @@ export default {
     });
   },
 
-  storeModule: require('@/store/modules/fiction').default,
+  storeModule: require('@/store/modules/fiction'),
 
   methods: {
     handlerClickOpenFiction(id) {

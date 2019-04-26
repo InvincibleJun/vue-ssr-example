@@ -1,3 +1,6 @@
 build
-client/router/index.js
+node_modules
+dist
+logs
+client/routers/index.js
 package-lock.json
