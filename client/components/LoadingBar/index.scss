@@ -1,0 +1,24 @@
+$namespace: c-loading-bar;
+
+.#{$namespace}-container {
+  position: fixed;
+  z-index: 10000000;
+  width: 100%;
+  top: 0;
+}
+
+.#{$namespace}-chunk {
+  width: 0;
+  box-shadow: 0 0 2px 0px #ff776a;
+  transition: width 0.2s ease-in;
+}
+
+.c-fade-enter-active,
+.c-fade-leave-active {
+  transition: opacity 0.1s;
+}
+
+.c-fade-enter,
+.c-fade-leave-to {
+  opacity: 0;
+}

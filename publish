@@ -1,0 +1,45 @@
+编译服脚本:
+```
+  
+  if $npm_install;then
+    npm i
+  fi
+
+  npm run build
+
+  tar -czfv $dist.tar dist server pm2-config.json package.json
+
+```
+
+生产服,接受文件为dist.tar:
+
+```
+cd $deploy_dir
+
+mkdir tmp
+
+tar xvf dist.tar -C tmp
+
+rm -fr dist.tar
+
+mv tmp/dist $BUILD_ID
+
+rm -fr server
+mv tmp/server server
+
+mv -f tmp/pm2-config.json pm2-config.json 
+mv -f tmp/package.json package.json
+
+rm -fr tmp
+
+if $npm_install;then
+  npm i
+fi
+
+ln -sfT $BUILD_ID dist
+
+npm run start:$env
+
+echo "publish success"
+
+```

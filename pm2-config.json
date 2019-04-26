@@ -1,0 +1,17 @@
+{
+  "name": "ssr-test",
+  "script": "./server/index.js",
+  "cwd": "./",
+  "watch": ["dist"],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "env_test": {
+    "SERVER_ENV": "test"
+  },
+  "env_prod": {
+    "SERVER_ENV": "prod"
+  },
+  "error_file": "./logs/err.log",
+  "out_file": "./logs/info.log"
+}

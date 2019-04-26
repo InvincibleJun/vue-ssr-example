@@ -1,0 +1,9 @@
+export default {
+  // user 相关
+  SAVE_USERINFO: 'SAVE_USERINFO',
+
+  // fiction
+  SET_FICTION_DATA: 'SET_FICTION_DATA',
+  SET_LIST_DATA: 'SET_LIST_DATA',
+  SET_CHAPTER_DATA: 'SET_CHAPTER_DATA'
+};

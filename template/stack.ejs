@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>server-error</title>
+  <style>
+    body {
+      padding: 0 40px;
+    }
+    pre {
+      border-radius: 8px;
+      background-color: rgb(220,220,220);
+      line-height: 20px;
+      display: inline-block;
+      padding: 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>server-error</h1>
+    <p>path: <%= url %></p>
+    <pre><%= stack %></pre>
+  </div>
+</body>
+</html>
